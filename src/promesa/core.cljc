@@ -19,9 +19,9 @@
   #?(:cljs (:require-macros [promesa.core]))
   #?(:clj
      (:import
-      java.util.concurrent.CompletableFuture
+      ;; java.util.concurrent.CompletableFuture
       java.util.concurrent.CompletionException
-      java.util.concurrent.CompletionStage
+      ;; java.util.concurrent.CompletionStage
       java.util.concurrent.ExecutionException
       java.util.concurrent.TimeoutException)))
 
@@ -347,13 +347,15 @@
   ([f p] (pt/-merr p f))
   ([executor f p] (pt/-merr p f executor)))
 
-(defn error
-  "Same as `catch` but with parameters inverted.
+#?(:bb nil ;; see https://github.com/babashka/sci/issues/896
+   :default
+   (defn error
+     "Same as `catch` but with parameters inverted.
 
   DEPRECATED"
 
-  ([f p] (catch p f))
-  ([f type p] (catch p type f)))
+     ([f p] (catch p f))
+     ([f type p] (catch p type f))))
 
 (defn all
   "Given an array of promises, return a promise that is fulfilled when
@@ -392,7 +394,7 @@
            lock  (util/mutex)]
      (create
       (fn [resolve reject]
-        (c/doseq [p promises]
+        #_(c/doseq [p promises]
           (pt/-fnly
            (pt/-promise p)
            (fn [v exception]

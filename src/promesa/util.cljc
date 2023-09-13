@@ -9,10 +9,10 @@
   #?(:clj
      (:import
       java.lang.reflect.Method
-      java.time.Duration
+      ;; java.time.Duration
       java.util.concurrent.CompletionException
       java.util.concurrent.CompletionStage
-      java.util.concurrent.CountDownLatch
+      ;; java.util.concurrent.CountDownLatch
       java.util.concurrent.locks.ReentrantLock
       ;; java.util.function.BiConsumer
       ;; java.util.function.BiFunction
@@ -23,17 +23,25 @@
 
 #?(:clj (set! *warn-on-reflection* true))
 
-#?(:clj
-   (extend-protocol clojure.core/Inst
-     Duration
-     (inst-ms* [v] (.toMillis ^Duration v))))
+;; #?(:clj
+;;    (extend-protocol clojure.core/Inst
+;;      Duration
+;;      (inst-ms* [v] (.toMillis ^Duration v))))
 
-#?(:clj
+#?(:bb
+   (defn ->Supplier [f]
+     (reify java.util.function.Supplier
+       (get [_] (f))))
+   :clj
    (deftype Supplier [f]
      java.util.function.Supplier
      (get [_] (f))))
 
-#?(:clj
+#?(:bb
+   (defn ->Function [f]
+     (reify java.util.function.Function
+       (apply [_ v] (f))))
+   :clj
    (deftype Function [f]
      java.util.function.Function
      (apply [_ v]
@@ -57,13 +65,23 @@
        (.getCause ^CompletionException cause)
        cause)))
 
-#?(:clj
+#?(:bb
+   (defn ->Function2 [f]
+     (reify java.util.function.BiFunction
+       (apply [_ r e]
+         (f r (unwrap-completion-exception e)))))
+   :clj
    (deftype Function2 [f]
      java.util.function.BiFunction
      (apply [_ r e]
        (f r (unwrap-completion-exception e)))))
 
-#?(:clj
+#?(:bb
+   (defn ->Consumer2 [f]
+     (reify java.util.function.BiConsumer
+       (accept [_ r e]
+         (f r (unwrap-completion-exception e)))))
+   :clj
    (deftype Consumer2 [f]
      java.util.function.BiConsumer
      (accept [_ r e]

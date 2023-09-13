@@ -10,7 +10,7 @@
   (:require
    [promesa.protocols :as pt]
    [promesa.util :as pu]
-   #?(:cljs [goog.object :as gobj])
+   ;; #?(:cljs [goog.object :as gobj])
    #?(:cljs [promesa.impl.promise :as impl]))
   #?(:clj
      (:import
@@ -19,27 +19,27 @@
       java.lang.Thread$UncaughtExceptionHandler
       java.time.Duration
       java.util.concurrent.BlockingQueue
-      java.util.concurrent.Callable
+      ;; java.util.concurrent.Callable
       java.util.concurrent.CancellationException
       java.util.concurrent.CompletableFuture
       java.util.concurrent.CompletionException
-      java.util.concurrent.CompletionStage
-      java.util.concurrent.CountDownLatch
+      ;; java.util.concurrent.CompletionStage
+      ;; java.util.concurrent.CountDownLatch
       java.util.concurrent.ExecutionException
       java.util.concurrent.Executor
       java.util.concurrent.ExecutorService
       java.util.concurrent.Executors
       java.util.concurrent.ForkJoinPool
       java.util.concurrent.ForkJoinPool$ForkJoinWorkerThreadFactory
-      java.util.concurrent.ForkJoinPool$ManagedBlocker
+      ;; java.util.concurrent.ForkJoinPool$ManagedBlocker
       java.util.concurrent.ForkJoinWorkerThread
-      java.util.concurrent.Future
+      ;; java.util.concurrent.Future
       java.util.concurrent.ScheduledExecutorService
       java.util.concurrent.SynchronousQueue
       java.util.concurrent.ThreadFactory
       java.util.concurrent.ThreadPoolExecutor
       java.util.concurrent.TimeUnit
-      java.util.concurrent.TimeoutException
+      ;; java.util.concurrent.TimeoutException
       java.util.concurrent.atomic.AtomicLong
       java.util.function.Supplier)))
 

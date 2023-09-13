@@ -7,7 +7,7 @@
 (ns ^:no-doc promesa.impl
   "Implementation of promise protocols."
   (:require
-   [clojure.core :as c]
+   ;; [clojure.core :as c]
    [promesa.protocols :as pt]
    [promesa.util :as pu]
    [promesa.exec :as exec]
@@ -24,9 +24,10 @@
       java.util.concurrent.Executor
       java.util.concurrent.Future
       java.util.concurrent.TimeUnit
-      java.util.concurrent.TimeoutException
+      ;; java.util.concurrent.TimeoutException
       java.util.function.Function
-      java.util.function.Supplier)))
+      ;; java.util.function.Supplier
+      )))
 
 ;; --- Global Constants
 
